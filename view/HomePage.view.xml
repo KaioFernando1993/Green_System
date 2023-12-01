@@ -1,0 +1,221 @@
+<mvc:View controllerName="application.controller.HomePage"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:smartForm="sap.ui.comp.smartform"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    >
+
+    <Page title="{i18n>title}" >
+        <!-- Form -->
+        
+        <smartForm:SmartForm class="sapUiTinyMargin" id="smartForm" editable="true" useHorizontalLayout="true" >
+            <smartForm:Group>
+                <!-- Cloumn 1 -->
+                <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
+                    <VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>search}" />
+                            <SearchField value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search=".onSearch"/>
+                        </VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>codeBp}" />
+                            <SearchField value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search=".onSearch"/>
+                        </VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>existBlock}" />
+                            <Input
+                                id="existBlockInput"
+                                placeholder="{i18n>filter}"
+                                showSuggestion="true"
+                                showValueHelp="true"
+                                valueHelpRequest=".onValueHelpRequest"
+                                suggestionItems="{/ProductCollection}">
+                                <suggestionItems>
+                                    <core:Item text="{Name}" />
+                                </suggestionItems>
+                            </Input>
+                        </VBox>
+                    </VBox>
+                </smartForm:GroupElement>
+
+                <!-- Cloumn 2 -->
+                <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
+                    <VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>avaliable}" />
+                            <Select forceSelection="false" placeholder="Selecione uma opção..." change="handleChange" width="100%">
+                                <items>
+                                    <core:ListItem icon="sap-icon://e-care" text="Milho" />
+                                    <core:ListItem icon="sap-icon://e-care" text="Biomassa" />
+                                    <core:ListItem icon="sap-icon://e-care" text="Nutrição Animal" />
+                                </items>
+                            </Select>
+                        </VBox>
+                        
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>identification}" />
+                            <Input
+                                id="identificationInput"
+                                placeholder="{i18n>filter}"
+                                showSuggestion="true"
+                                showValueHelp="true"
+                                valueHelpRequest=".onValueHelpRequest"
+                                suggestionItems="{/ProductCollection}">
+                                <suggestionItems>
+                                    <core:Item text="{Name}" />
+                                </suggestionItems>
+                            </Input>
+                        </VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>dateBlock}" />
+                            <Input
+                                id="dateBlockInput"
+                                placeholder="{i18n>filter}"
+                                showSuggestion="true"
+                                showValueHelp="true"
+                                valueHelpRequest=".onValueHelpRequest"
+                                suggestionItems="{/ProductCollection}">
+                                <suggestionItems>
+                                    <core:Item text="{Name}" />
+                                </suggestionItems>
+                            </Input>
+                        </VBox>
+                    </VBox>
+                </smartForm:GroupElement>
+
+
+                <!-- Cloumn 3 -->
+                <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
+                    <VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>typePartner}" />
+                                <Select change="handleChange" width="100%">
+                                    <items>
+                                        <core:Item key="placeholder" text="{i18n>select}" enabled="false"/>
+                                        <core:Item text="?" />
+                                        <core:Item text="?" />
+                                        <core:Item text="?" />
+                                    </items>
+                                </Select>
+                        </VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>nameBp}" />
+                            <Input
+                                id="nameBpInput"
+                                placeholder="{i18n>filter}"
+                                showSuggestion="true"
+                                showValueHelp="true"
+                                valueHelpRequest=".onValueHelpRequest"
+                                suggestionItems="{/ProductCollection}">
+                                <suggestionItems>
+                                    <core:Item text="{Name}" />
+                                </suggestionItems>
+                            </Input>
+                        </VBox>
+                        <VBox class="sapUiTinyMargin">
+                            <Label text="{i18n>status}" />
+                            <Input
+                                id="statusInput"
+                                placeholder="{i18n>filter}"
+                                showSuggestion="true"
+                                showValueHelp="true"
+                                valueHelpRequest=".onValueHelpRequest"
+                                suggestionItems="{/ProductCollection}">
+                                <suggestionItems>
+                                    <core:Item text="{Name}" />
+                                </suggestionItems>
+                            </Input>
+                        </VBox>
+                    </VBox>
+                </smartForm:GroupElement>
+
+                <!-- Cloumn 4 -->
+                <smartForm:GroupElement class="sapUiResponsiveMargin">
+
+                    <VBox class="sapUiTinyMargin" >
+                        <HBox class="sapUiTinyMargin">
+                        <Button 
+                        text="{i18n>btnFilter}" class="sapUiTinyMargin" type="Emphasized" />
+                        <Button 
+                        text="{i18n>btnHideFilter}" class="sapUiTinyMargin btnDefault" type="Default" press="onHideFiltersPress"/>
+                    </HBox>
+                            <VBox class="sapUiTinyMargin" width="80%" visible="{visibleModel>/filters}">
+                                <Label text="{i18n>typeBp}" />
+                                <Input
+                                    id="typeBpInput"
+                                    placeholder="{i18n>filter}"
+                                    showSuggestion="true"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onValueHelpRequest"
+                                    suggestionItems="{/ProductCollection}">
+                                    <suggestionItems>
+                                        <core:Item text="{Name}" />
+                                    </suggestionItems>
+                                </Input>
+                            </VBox>
+                            <VBox class="sapUiTinyMargin" width="80%" visible="{visibleModel>/filters}">
+                                <Label text="{i18n>typeDateRegister}" />
+                                <Input
+                                    id="typeDateRegisterInput"
+                                    placeholder="{i18n>filter}"
+                                    showSuggestion="true"
+                                    showValueHelp="true"
+                                    valueHelpRequest=".onValueHelpRequest"
+                                    suggestionItems="{/ProductCollection}">
+                                    <suggestionItems>
+                                        <core:Item text="{Name}" />
+                                    </suggestionItems>
+                                </Input>
+                            </VBox>
+                        </VBox>
+                </smartForm:GroupElement>
+            </smartForm:Group>
+        </smartForm:SmartForm>
+        <!-- Table Filters -->
+        <Table class="sapUiTinyMargin" id="myTable" items="{tableModel>/items}" >
+            <columns>
+               <Column>
+                  <Label text="{i18n>tbCode}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbIdentification}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbName}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbType}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbExistBlock}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbDateBlock}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbState}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>tbDateRegister}"/>
+               </Column>
+            </columns>
+            <items>
+               <ColumnListItem type="Navigation" press="onClickToDetail">
+                  <cells>
+                     <Text text="{tableModel>Code}"/>
+                     <Text text="{tableModel>Identification}"/>
+                     <Text text="{tableModel>Name}"/>
+                     <Text text="{tableModel>Type}"/>
+                     <Text text="{tableModel>ExistBlock}"/>
+                     <Text text="{tableModel>DateBlock}"/>
+                     <Text text="{tableModel>State}"/>
+                     <Text text="{tableModel>DateRegister}"/>
+                  </cells>
+               </ColumnListItem>
+            </items>
+         </Table>
+    </Page>
+</mvc:View>

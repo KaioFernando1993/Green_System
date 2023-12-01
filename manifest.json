@@ -1,0 +1,133 @@
+{
+    "_version": "1.49.0",
+    "sap.app": {
+        "id": "application",
+        "type": "application",
+        "i18n": "i18n/i18n.properties",
+        "applicationVersion": {
+            "version": "0.0.1"
+        },
+        "title": "{{appTitle}}",
+        "description": "{{appDescription}}",
+        "resources": "resources.json",
+        "sourceTemplate": {
+            "id": "@sap/generator-fiori:basic",
+            "version": "1.11.1",
+            "toolsId": "f298d1cb-a8b0-48e5-880a-bca7cf58e0a0"
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "icons": {
+            "icon": "",
+            "favIcon": "",
+            "phone": "",
+            "phone@2": "",
+            "tablet": "",
+            "tablet@2": ""
+        },
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "flexEnabled": true,
+        "dependencies": {
+            "minUI5Version": "1.120.1",
+            "libs": {
+                "sap.m": {},
+                "sap.ui.core": {},
+                "sap.f": {},
+                "sap.suite.ui.generic.template": {},
+                "sap.ui.comp": {},
+                "sap.ui.generic.app": {},
+                "sap.ui.table": {},
+                "sap.ushell": {},
+                "sap.ui.layout": {},
+                "sap.suite.ui.microchart": {}
+            }
+        },
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "application.i18n.i18n"
+                }
+            }
+        },
+        "resources": {
+            "css": [{
+                "uri": "css/style.css"
+            }]
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "viewType": "XML",
+                "async": true,
+                "viewPath": "application.view",
+                "controlAggregation": "pages",
+                "controlId": "app",
+                "clearControlAggregation": false
+            },
+            "routes": [{
+                    "name": "RouteHomePage",
+                    "pattern": ":?query:",
+                    "target": [
+                        "TargetHomePage"
+                    ]
+                },
+                {
+                    "name": "DetailRoute",
+                    "pattern": "detail",
+                    "target": [
+                        "TargetDetail"
+                    ]
+                },
+                {
+                    "name": "OpinionsRoute",
+                    "pattern": "Opinions",
+                    "target": [
+                        "TargetOpinions"
+                    ]
+                }
+            ],
+            "targets": {
+                "TargetHomePage": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "HomePage",
+                    "viewName": "HomePage"
+                },
+                "TargetDetail": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Detail",
+                    "viewName": "Detail"
+
+                },
+                "TargetOpinions": {
+                    "viewType": "XML",
+                    "transition": "slide",
+                    "clearControlAggregation": false,
+                    "viewId": "Opinions",
+                    "viewName": "Opinions"
+                }
+            }
+        },
+        "rootView": {
+            "viewName": "application.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "App"
+        }
+    }
+}

@@ -1,0 +1,41 @@
+<mvc:View controllerName="application.controller.Opinions"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:m="sap.m"
+    xmlns="sap.suite.ui.microchart"
+    xmlns:layout="sap.ui.layout">
+
+    <layout:HorizontalLayout class="sapUiContentPadding" width="100%">
+    
+
+        <m:Panel defaultSpan="XL4 L5 M5 S11">
+            <m:content>
+                <m:FlexBox width="300px" height="150px" alignItems="Start" justifyContent="SpaceBetween">
+                    <m:items>
+                        <InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="2" press="press">
+                            <segments>
+                                <InteractiveDonutChartSegment label="Design Phase" value="75" displayedValue="75.0%"/>
+                                <InteractiveDonutChartSegment label="Implementation Phase" value="25" displayedValue="25%"/>
+                            </segments>
+                        </InteractiveDonutChart>
+                    </m:items>
+                </m:FlexBox>
+            </m:content>
+        </m:Panel>
+
+        <m:Panel defaultSpan="XL6 L6 M6 S12">
+            <m:content>
+                <m:FlexBox width="300px" height="150px" alignItems="Start" justifyContent="SpaceBetween">
+                    <m:items>
+                        <InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
+                            <segments>
+                                <InteractiveDonutChartSegment label="Design Phase" value="100" displayedValue="100.0%"/>
+                            </segments>
+                        </InteractiveDonutChart>
+                    </m:items>
+                </m:FlexBox>
+            </m:content>
+        </m:Panel>
+
+    </layout:HorizontalLayout>
+
+</mvc:View>

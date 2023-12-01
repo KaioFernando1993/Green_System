@@ -1,0 +1,11 @@
+.btnDefault {
+    color: black;
+}
+
+.sapUiForm .sapUiCompGroupElementVBox .sapMLabel:after {
+    content: "";
+}
+
+.sapMBtnInner {
+    color: black;
+}
