@@ -1,41 +1,154 @@
 <mvc:View controllerName="application.controller.Opinions"
+    xmlns:micro="sap.suite.ui.microchart"
+    xmlns:main="sap.ui.webc.main"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns:m="sap.m"
-    xmlns="sap.suite.ui.microchart"
-    xmlns:layout="sap.ui.layout">
+    xmlns:l="sap.ui.layout"
+    xmlns="sap.m"
+    width="100%">
+<Page title="{i18n>titleOpnions}">
+    <Panel class="sapUiMediumMargin">
+        <HBox alignContent="Center" alignItems="Center">
+            <!-- Header -->
+            <GenericTile 
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+                header="{i18n>opBlockedCustomers}" press="press">
+                <TileContent >
+                    <content>
+                        <Title level="H1" text="21" class="customTitleClass"/>
+                    </content>
+                </TileContent>
+            </GenericTile>
 
-    <layout:HorizontalLayout class="sapUiContentPadding" width="100%">
-    
+            <GenericTile 
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+                header="{i18n>opOpenLookin}" 
+                press="press">
+                <TileContent >
+                    <content>
+                        <Title level="H1" text="24" class="customTitleClass"/>
+                    </content>
+                </TileContent>
+            </GenericTile>
 
-        <m:Panel defaultSpan="XL4 L5 M5 S11">
-            <m:content>
-                <m:FlexBox width="300px" height="150px" alignItems="Start" justifyContent="SpaceBetween">
-                    <m:items>
-                        <InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="2" press="press">
-                            <segments>
-                                <InteractiveDonutChartSegment label="Design Phase" value="75" displayedValue="75.0%"/>
-                                <InteractiveDonutChartSegment label="Implementation Phase" value="25" displayedValue="25%"/>
-                            </segments>
-                        </InteractiveDonutChart>
-                    </m:items>
-                </m:FlexBox>
-            </m:content>
-        </m:Panel>
-
-        <m:Panel defaultSpan="XL6 L6 M6 S12">
-            <m:content>
-                <m:FlexBox width="300px" height="150px" alignItems="Start" justifyContent="SpaceBetween">
-                    <m:items>
-                        <InteractiveDonutChart selectionChanged="onSelectionChanged" displayedSegments="4" press="press">
-                            <segments>
-                                <InteractiveDonutChartSegment label="Design Phase" value="100" displayedValue="100.0%"/>
-                            </segments>
-                        </InteractiveDonutChart>
-                    </m:items>
-                </m:FlexBox>
-            </m:content>
-        </m:Panel>
-
-    </layout:HorizontalLayout>
-
+            <GenericTile 
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+                header="{i18n>opStatusBp}" 
+                press="press"
+                frameType= "TwoByHalf ">
+                <TileContent >
+                    <content alignItems="Center">
+                        <micro:RadialMicroChart alignment="Center" size="L" percentage="100" press="press" class="sapUiSmallMargin"></micro:RadialMicroChart>
+                    </content>
+                </TileContent>
+            </GenericTile>
+   
+        
+            <GenericTile 
+                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
+                header="{i18n>opStatusOpinions}" 
+                press="press"
+                frameType=" OneByOne">
+                <TileContent>
+                    <content>
+                        <FlexBox width="18rem" height="9rem" alignItems="Center" justifyContent="SpaceBetween">
+                            <items>
+                                <micro:InteractiveDonutChart selectionChanged="onSelectionChanged">
+                                    <micro:segments>
+                                        <micro:InteractiveDonutChartSegment label="{i18n>opAccording}" value="75.0" displayedValue="75.0%"/>
+                                        <micro:InteractiveDonutChartSegment label="{i18n>opNoConforming}" value="25" displayedValue="25.0%"/>
+                                    </micro:segments>
+                                </micro:InteractiveDonutChart>
+                            </items>
+                        </FlexBox>
+                    </content>
+                </TileContent>
+            </GenericTile>
+        </HBox>
+    </Panel>
+    <!-- Tabela -->
+    <Panel class="sapUiMediumMargin">
+        <Table id="myOpTable" items="" >
+            <columns>
+               <Column>
+                  <Label text="{i18n>opDate}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opDateOpinionsRegister}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opBpSAP}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opDocument}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opName}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opCountry}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opStatusBp}"/>
+               </Column>
+               <Column>
+                  <Label text="{i18n>opNOpinions}"/>
+               </Column>
+               <Column>
+                <Label text="{i18n>opOpnions}"/>
+             </Column>
+             <Column>
+                <Label text="{i18n>opOpinionsAnex}"/>
+             </Column>
+             <Column>
+                <Label/><!-- coluna para checkbox-->
+             </Column>
+            </columns>
+            <items>
+               <ColumnListItem >
+                  <cells>
+                     <Text text="test"/>
+                     <Text text="test"/>
+                     <Text text="test"/>
+                     <Text text="test"/>
+                     <main:Badge text="test" colorScheme="5" />
+                     <Text text="test"/>
+                     <main:Badge text="test" colorScheme="6" /><!-- 6 ou 1-->
+                     <Text text="test"/>
+                     <Text text="test"/>
+                     <Text text="test"/>
+                     <CheckBox  change="handleChange" />
+                    </cells>
+                </ColumnListItem>
+            </items>
+         </Table>
+    </Panel>
+    <Panel>
+        <l:VerticalLayout class="sapUiContentPadding">
+            <main:Badge text="available 1" />
+            <main:Badge text="required 2" colorScheme="2" />
+            <main:Badge text="3" colorScheme="3" />
+            <main:Badge text="bug 4" colorScheme="4" />
+            <main:Badge text="in process 5" colorScheme="5" />
+            <main:Badge text="in warehouse 6" colorScheme="6" />
+            <main:Badge text="7" colorScheme="7" />
+            <main:Badge text="solution provided 8" colorScheme="8" />
+            <main:Badge text="pending release 9" colorScheme="9" />
+            <main:Badge text="customer action 10" colorScheme="10" />
+            <main:Badge text="done"/>
+            
+        </l:VerticalLayout>
+    </Panel>
+    <footer>
+        <Bar>
+            <contentRight>
+            <Button 
+                text="{i18n>opDownloadSelect}" 
+                icon="sap-icon://download" 
+                type="Emphasized" 
+                press="onEscapePreventDialogPress" 
+                ariaHasPopup="Dialog"/>
+            </contentRight>
+        </Bar>
+    </footer>
+</Page>
 </mvc:View>

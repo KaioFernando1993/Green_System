@@ -9,3 +9,8 @@
 .sapMBtnInner {
     color: black;
 }
+
+.customTitleClass {
+    font-size: 4rem;
+    /* ou o tamanho desejado em unidades que você preferir */
+}

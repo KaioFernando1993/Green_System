@@ -9,7 +9,7 @@
 			<VBox>
 				<HBox alignItems="Center" justifyContent="SpaceBetween">
 					<Title text="{i18n>contract}" />
-					<SearchField width="60%" search=".onSearch" />
+					<SearchField width="90%" search="" />
 				</HBox>
 			</VBox>
 			<Table id="table" items="{/tableData}">
@@ -57,7 +57,7 @@
 						<VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>document}" />
-								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="90%" search="" />
+								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search="" />
 							</VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>municipality}" />

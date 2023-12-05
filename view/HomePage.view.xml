@@ -3,38 +3,42 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:smartForm="sap.ui.comp.smartform"
     xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:main="sap.ui.webc.main"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:core="sap.ui.core"
     xmlns="sap.m"
-    >
+    height="100%"
+>
 
     <Page title="{i18n>title}" >
         <!-- Form -->
-        
         <smartForm:SmartForm class="sapUiTinyMargin" id="smartForm" editable="true" useHorizontalLayout="true" >
             <smartForm:Group>
                 <!-- Cloumn 1 -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
+                        <!-- Pesquisar -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>search}" />
-                            <SearchField value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search=".onSearch"/>
+                            <SearchField value="{visibleModel>/data/searchQuery/value}" placeholder="{i18n>keySearch}" width="100%" id="onSearch1"/>
                         </VBox>
+                        <!-- Code BP -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>codeBp}" />
-                            <SearchField value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search=".onSearch"/>
+                            <SearchField value="{visibleModel>/data/codeBpQuery/value}" placeholder="{i18n>keySearch}" width="100%" id="onSearchCodeBp"/>
                         </VBox>
+                        <!-- Existe Bloqueio -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>existBlock}" />
                             <Input
+                                value="{visibleModel>/data/existBlock/value}"
                                 id="existBlockInput"
                                 placeholder="{i18n>filter}"
                                 showSuggestion="true"
-                                showValueHelp="true"
-                                valueHelpRequest=".onValueHelpRequest"
-                                suggestionItems="{/ProductCollection}">
+                                showValueHelp="true">
                                 <suggestionItems>
-                                    <core:Item text="{Name}" />
+                                    <core:Item text="BLOQUEADO" />
+                                    <core:Item text="NÃO BLOQUEADO" />
                                 </suggestionItems>
                             </Input>
                         </VBox>
@@ -44,9 +48,14 @@
                 <!-- Cloumn 2 -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
+                        <!-- Avaliação sócioambiental -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>avaliable}" />
-                            <Select forceSelection="false" placeholder="Selecione uma opção..." change="handleChange" width="100%">
+                            <Select 
+                                forceSelection="false" 
+                                value="{visibleModel>/data/avaliable/value}"
+                                change="handleChange" 
+                                width="100%">
                                 <items>
                                     <core:ListItem icon="sap-icon://e-care" text="Milho" />
                                     <core:ListItem icon="sap-icon://e-care" text="Biomassa" />
@@ -54,7 +63,7 @@
                                 </items>
                             </Select>
                         </VBox>
-                        
+                        <!-- CPF CNPJ -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>identification}" />
                             <Input
@@ -62,13 +71,14 @@
                                 placeholder="{i18n>filter}"
                                 showSuggestion="true"
                                 showValueHelp="true"
-                                valueHelpRequest=".onValueHelpRequest"
-                                suggestionItems="{/ProductCollection}">
+                                value="{visibleModel>/data/identification/value}">
                                 <suggestionItems>
-                                    <core:Item text="{Name}" />
+                                    <core:Item key="Cpf" text="Cpf" />
+                                    <core:Item key="Cnpj" text="Cnpj" />
                                 </suggestionItems>
                             </Input>
                         </VBox>
+                        <!-- Data Bloqueio -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>dateBlock}" />
                             <Input
@@ -76,10 +86,10 @@
                                 placeholder="{i18n>filter}"
                                 showSuggestion="true"
                                 showValueHelp="true"
-                                valueHelpRequest=".onValueHelpRequest"
-                                suggestionItems="{/ProductCollection}">
+                                value="{visibleModel>/data/dateBlock/value}">
                                 <suggestionItems>
-                                    <core:Item text="{Name}" />
+                                    <core:Item key="" text="{Name}" />
+                                    <core:Item key="Não se aplica" text="Não se aplica" />
                                 </suggestionItems>
                             </Input>
                         </VBox>
@@ -90,9 +100,10 @@
                 <!-- Cloumn 3 -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
+                        <!-- Tipo de Parceiro -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>typePartner}" />
-                                <Select change="handleChange" width="100%">
+                                <Select value="{visibleModel>/data/typePartner/value}" change="handleChange" width="100%">
                                     <items>
                                         <core:Item key="placeholder" text="{i18n>select}" enabled="false"/>
                                         <core:Item text="?" />
@@ -101,6 +112,7 @@
                                     </items>
                                 </Select>
                         </VBox>
+                        <!-- Nome BP -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>nameBp}" />
                             <Input
@@ -108,13 +120,13 @@
                                 placeholder="{i18n>filter}"
                                 showSuggestion="true"
                                 showValueHelp="true"
-                                valueHelpRequest=".onValueHelpRequest"
-                                suggestionItems="{/ProductCollection}">
+                                value="{visibleModel>/data/nameBp/value}">
                                 <suggestionItems>
-                                    <core:Item text="{Name}" />
+                                    <core:Item key="" text="" />
                                 </suggestionItems>
                             </Input>
                         </VBox>
+                        <!-- Satatus -->
                         <VBox class="sapUiTinyMargin">
                             <Label text="{i18n>status}" />
                             <Input
@@ -122,10 +134,10 @@
                                 placeholder="{i18n>filter}"
                                 showSuggestion="true"
                                 showValueHelp="true"
-                                valueHelpRequest=".onValueHelpRequest"
-                                suggestionItems="{/ProductCollection}">
+                                value="{visibleModel>/data/status/value}">
                                 <suggestionItems>
-                                    <core:Item text="{Name}" />
+                                    <core:Item key="COM DETECÇÃO" text="COM DETECÇÃO" />
+                                    <core:Item key="SEM DETECÇÃO" text="SEM DETECÇÃO" />
                                 </suggestionItems>
                             </Input>
                         </VBox>
@@ -136,12 +148,20 @@
                 <smartForm:GroupElement class="sapUiResponsiveMargin">
 
                     <VBox class="sapUiTinyMargin" >
+                        <!-- Buttons -->
                         <HBox class="sapUiTinyMargin">
-                        <Button 
-                        text="{i18n>btnFilter}" class="sapUiTinyMargin" type="Emphasized" />
-                        <Button 
-                        text="{i18n>btnHideFilter}" class="sapUiTinyMargin btnDefault" type="Default" press="onHideFiltersPress"/>
-                    </HBox>
+                            <Button 
+                                text="{i18n>btnFilter}" 
+                                class="sapUiTinyMargin" 
+                                type="Emphasized" 
+                                press="onFilterPress"/> <!-- Filtrar -->
+                            <Button 
+                                text="{i18n>btnHideFilter}" 
+                                class="sapUiTinyMargin btnDefault" 
+                                type="Default" 
+                                press="onHideFiltersPress"/><!-- Visualizar Filtros -->
+                        </HBox>
+                        <!-- Tipo BP -->
                             <VBox class="sapUiTinyMargin" width="80%" visible="{visibleModel>/filters}">
                                 <Label text="{i18n>typeBp}" />
                                 <Input
@@ -149,13 +169,14 @@
                                     placeholder="{i18n>filter}"
                                     showSuggestion="true"
                                     showValueHelp="true"
-                                    valueHelpRequest=".onValueHelpRequest"
-                                    suggestionItems="{/ProductCollection}">
+                                    value="{visibleModel>/data/typeBp/value}">
                                     <suggestionItems>
-                                        <core:Item text="{Name}" />
+                                        <core:Item key="Cliente" text="Cliente" />
+                                        <core:Item key="Fornecedor" text="Fornecedor" />
                                     </suggestionItems>
                                 </Input>
                             </VBox>
+                            <!-- tipo de Cadastro -->
                             <VBox class="sapUiTinyMargin" width="80%" visible="{visibleModel>/filters}">
                                 <Label text="{i18n>typeDateRegister}" />
                                 <Input
@@ -163,8 +184,7 @@
                                     placeholder="{i18n>filter}"
                                     showSuggestion="true"
                                     showValueHelp="true"
-                                    valueHelpRequest=".onValueHelpRequest"
-                                    suggestionItems="{/ProductCollection}">
+                                    value="{visibleModel>/data/typeDateRegister/value}">
                                     <suggestionItems>
                                         <core:Item text="{Name}" />
                                     </suggestionItems>
@@ -209,9 +229,14 @@
                      <Text text="{tableModel>Identification}"/>
                      <Text text="{tableModel>Name}"/>
                      <Text text="{tableModel>Type}"/>
-                     <Text text="{tableModel>ExistBlock}"/>
-                     <Text text="{tableModel>DateBlock}"/>
-                     <Text text="{tableModel>State}"/>
+                     <main:Badge 
+                        text="{tableModel>ExistBlock}" 
+                        colorScheme="{path: 'tableModel>sExistBlock', formatter: '.formatter.formatExistBlockColorScheme'}" />
+                     <Text text="{tableModel>DateBlock}" />
+                     <main:Badge 
+                        text="{tableModel>State}" 
+                        colorScheme="{path: 'tableModel>State', formatter: '.formatter.formatStateColorScheme'}" />
+                     <Text text="{tableModel>State}" />
                      <Text text="{tableModel>DateRegister}"/>
                   </cells>
                </ColumnListItem>
