@@ -1,78 +1,76 @@
 <mvc:View controllerName="application.controller.Opinions"
     xmlns:micro="sap.suite.ui.microchart"
     xmlns:main="sap.ui.webc.main"
+    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns:l="sap.ui.layout"
     xmlns="sap.m"
     width="100%">
 <Page title="{i18n>titleOpnions}">
-    <Panel class="sapUiMediumMargin">
-        <HBox alignContent="Center" alignItems="Center">
+        <HBox justifyContent="SpaceBetween">
             <!-- Header -->
-            <GenericTile 
-                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-                header="{i18n>opBlockedCustomers}" press="press">
+            <VBox backgroundDesign="Solid" class="sapUiTinyMargin sapVboxBorder" width="90%">
+                <Title class="sapUiSmallMargin" text="{i18n>opBlockedCustomers}"/>
                 <TileContent >
                     <content>
                         <Title level="H1" text="21" class="customTitleClass"/>
                     </content>
                 </TileContent>
-            </GenericTile>
+            </VBox>
 
-            <GenericTile 
-                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-                header="{i18n>opOpenLookin}" 
-                press="press">
+            <VBox backgroundDesign="Solid" class="sapUiTinyMargin sapVboxBorder" width="90%">
+                <Title class="sapUiSmallMargin"  text="{i18n>opOpenLookin}"/>
                 <TileContent >
                     <content>
                         <Title level="H1" text="24" class="customTitleClass"/>
                     </content>
                 </TileContent>
-            </GenericTile>
+            </VBox>
 
-            <GenericTile 
-                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-                header="{i18n>opStatusBp}" 
-                press="press"
-                frameType= "TwoByHalf ">
-                <TileContent >
-                    <content alignItems="Center">
-                        <micro:RadialMicroChart alignment="Center" size="L" percentage="100" press="press" class="sapUiSmallMargin"></micro:RadialMicroChart>
-                    </content>
-                </TileContent>
-            </GenericTile>
+            <VBox backgroundDesign="Solid" class="sapUiTinyMargin sapVboxBorder" width="100%">
+                <Title  class="sapUiSmallMargin" text="{i18n>opStatusBp}"/> 
+                    <TileContent>
+                        <content>
+                            <FlexBox width="15rem" height="8rem" >
+                                <items>
+                                    <micro:InteractiveDonutChart class="graficoComCorCustom1" selectionChanged="onSelectionChanged">
+                                        <micro:segments>
+                                            <micro:InteractiveDonutChartSegment label="{i18n>opAccording}" value="75.0" displayedValue="75.0%" />
+                                            <micro:InteractiveDonutChartSegment label="{i18n>opNoConforming}" value="25" displayedValue="25.0%"/>
+                                        </micro:segments>
+                                    </micro:InteractiveDonutChart>
+                                </items>
+                            </FlexBox>
+                        </content>
+                    </TileContent>
+            </VBox>
    
-        
-            <GenericTile 
-                class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" 
-                header="{i18n>opStatusOpinions}" 
-                press="press"
-                frameType=" OneByOne">
+            <VBox backgroundDesign="Solid" class="sapUiTinyMargin sapVboxBorder" width="100%">
+                <Title class="sapUiSmallMargin"  text="{i18n>opStatusOpinions}" />
                 <TileContent>
                     <content>
-                        <FlexBox width="18rem" height="9rem" alignItems="Center" justifyContent="SpaceBetween">
+                        <FlexBox width="15rem" height="8rem">
                             <items>
                                 <micro:InteractiveDonutChart selectionChanged="onSelectionChanged">
                                     <micro:segments>
-                                        <micro:InteractiveDonutChartSegment label="{i18n>opAccording}" value="75.0" displayedValue="75.0%"/>
-                                        <micro:InteractiveDonutChartSegment label="{i18n>opNoConforming}" value="25" displayedValue="25.0%"/>
+                                        <micro:InteractiveDonutChartSegment label="{i18n>opAccording}" value="100.0" displayedValue="100.0%"/>
+                                        <micro:InteractiveDonutChartSegment label="{i18n>opNoConforming}" value="0" displayedValue="0.0%"/>
                                     </micro:segments>
                                 </micro:InteractiveDonutChart>
                             </items>
                         </FlexBox>
                     </content>
                 </TileContent>
-            </GenericTile>
+            </VBox>
         </HBox>
-    </Panel>
     <!-- Tabela -->
-    <Panel class="sapUiMediumMargin">
-        <Table id="myOpTable" items="" >
+    <Panel class="sapUiTinyMargin ">
+        <Table id="myOpTable" items="{visibleModel/Filter}" width="100%">
             <columns>
-               <Column>
+               <Column width="5rem">
                   <Label text="{i18n>opDate}"/>
                </Column>
-               <Column>
+               <Column width="11rem">
                   <Label text="{i18n>opDateOpinionsRegister}"/>
                </Column>
                <Column>
@@ -96,7 +94,7 @@
                <Column>
                 <Label text="{i18n>opOpnions}"/>
              </Column>
-             <Column>
+             <Column width="9rem">
                 <Label text="{i18n>opOpinionsAnex}"/>
              </Column>
              <Column>
@@ -105,38 +103,22 @@
             </columns>
             <items>
                <ColumnListItem >
-                  <cells>
-                     <Text text="test"/>
-                     <Text text="test"/>
-                     <Text text="test"/>
-                     <Text text="test"/>
-                     <main:Badge text="test" colorScheme="5" />
-                     <Text text="test"/>
-                     <main:Badge text="test" colorScheme="6" /><!-- 6 ou 1-->
-                     <Text text="test"/>
-                     <Text text="test"/>
-                     <Text text="test"/>
+                  <cells width="100%">
+                     <Text text=""/>
+                     <Text text="{/}"/>
+                     <Text text="{/}"/>
+                     <Text text="{/}"/>
+                     <Text text="{/}"/>
+                     <Text text="{/}"/>
+                     <main:Badge text="{/}" colorScheme="5" /> <!-- 5 ou -->
+                     <Text text="{/}" />
+                     <main:Badge text="{/}" colorScheme="6" /><!-- 6 ou 1-->
+                     <Link text="{document.pdf}" icon="sap-icon://activity-2"/>
                      <CheckBox  change="handleChange" />
                     </cells>
                 </ColumnListItem>
             </items>
          </Table>
-    </Panel>
-    <Panel>
-        <l:VerticalLayout class="sapUiContentPadding">
-            <main:Badge text="available 1" />
-            <main:Badge text="required 2" colorScheme="2" />
-            <main:Badge text="3" colorScheme="3" />
-            <main:Badge text="bug 4" colorScheme="4" />
-            <main:Badge text="in process 5" colorScheme="5" />
-            <main:Badge text="in warehouse 6" colorScheme="6" />
-            <main:Badge text="7" colorScheme="7" />
-            <main:Badge text="solution provided 8" colorScheme="8" />
-            <main:Badge text="pending release 9" colorScheme="9" />
-            <main:Badge text="customer action 10" colorScheme="10" />
-            <main:Badge text="done"/>
-            
-        </l:VerticalLayout>
     </Panel>
     <footer>
         <Bar>

@@ -10,11 +10,11 @@
     height="100%"
 >
 
-    <Page title="{i18n>title}" >
-        <!-- Form -->
-        <smartForm:SmartForm class="sapUiTinyMargin" id="smartForm" editable="true" useHorizontalLayout="true" >
+    <Page title="{i18n>title}">
+        <!-- Formulário de Filtros -->
+        <smartForm:SmartForm class="sapUiSmallMargin" id="smartForm" editable="true" useHorizontalLayout="true" >
             <smartForm:Group>
-                <!-- Cloumn 1 -->
+            <!-- Grupo de Filtros (Column 1) -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
                         <!-- Pesquisar -->
@@ -45,7 +45,7 @@
                     </VBox>
                 </smartForm:GroupElement>
 
-                <!-- Cloumn 2 -->
+            <!-- Grupo de Filtros (Column 2) -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
                         <!-- Avaliação sócioambiental -->
@@ -96,8 +96,7 @@
                     </VBox>
                 </smartForm:GroupElement>
 
-
-                <!-- Cloumn 3 -->
+            <!-- Grupo de Filtros (Column 3) -->
                 <smartForm:GroupElement class="sapUiResponsiveMargin" visible="{visibleModel>/filters}">
                     <VBox>
                         <!-- Tipo de Parceiro -->
@@ -156,7 +155,7 @@
                                 type="Emphasized" 
                                 press="onFilterPress"/> <!-- Filtrar -->
                             <Button 
-                                text="{i18n>btnHideFilter}" 
+                                text="{= ${visibleModel>/filters} ? ${i18n>btnHideFilterClose} : ${i18n>btnHideFilterOpen} }"
                                 class="sapUiTinyMargin btnDefault" 
                                 type="Default" 
                                 press="onHideFiltersPress"/><!-- Visualizar Filtros -->
@@ -195,12 +194,13 @@
             </smartForm:Group>
         </smartForm:SmartForm>
         <!-- Table Filters -->
-        <Table class="sapUiTinyMargin" id="myTable" items="{tableModel>/items}" >
+        <Panel class="sapUiSmallMargin" >
+        <Table id="myTable" items="{tableModel>/items}" >
             <columns>
-               <Column>
+               <Column >
                   <Label text="{i18n>tbCode}"/>
                </Column>
-               <Column>
+               <Column width="10rem">
                   <Label text="{i18n>tbIdentification}"/>
                </Column>
                <Column>
@@ -209,18 +209,21 @@
                <Column>
                   <Label text="{i18n>tbType}"/>
                </Column>
-               <Column>
+               <Column width="9rem">
                   <Label text="{i18n>tbExistBlock}"/>
                </Column>
                <Column>
                   <Label text="{i18n>tbDateBlock}"/>
                </Column>
-               <Column>
+               <Column  width="9rem">
                   <Label text="{i18n>tbState}"/>
                </Column>
                <Column>
                   <Label text="{i18n>tbDateRegister}"/>
                </Column>
+               <Column>
+                <Label/><!-- coluna para Panel-->
+             </Column>
             </columns>
             <items>
                <ColumnListItem type="Navigation" press="onClickToDetail">
@@ -231,16 +234,21 @@
                      <Text text="{tableModel>Type}"/>
                      <main:Badge 
                         text="{tableModel>ExistBlock}" 
-                        colorScheme="{path: 'tableModel>sExistBlock', formatter: '.formatter.formatExistBlockColorScheme'}" />
+                        colorScheme="{
+                            path: 'tableModel>ExistBlock', 
+                            formatter: '.formatter.formatExistBlockColorScheme'}" />
                      <Text text="{tableModel>DateBlock}" />
                      <main:Badge 
                         text="{tableModel>State}" 
-                        colorScheme="{path: 'tableModel>State', formatter: '.formatter.formatStateColorScheme'}" />
-                     <Text text="{tableModel>State}" />
+                        colorScheme="{
+                            path: 'tableModel>State', 
+                            formatter: '.formatter.formatStateColorScheme'}" />
                      <Text text="{tableModel>DateRegister}"/>
+                     <Label src="sap-icon://edit"/>
                   </cells>
                </ColumnListItem>
             </items>
          </Table>
+        </Panel>
     </Page>
 </mvc:View>

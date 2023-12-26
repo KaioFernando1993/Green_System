@@ -1,7 +1,8 @@
 <View controllerName="application.controller.Detail" 
 	xmlns:smartForm="sap.ui.comp.smartform" 
 	xmlns:mvc="sap.ui.core.mvc" 
-	xmlns:core="sap.ui.core" 
+	xmlns:core="sap.ui.core"
+	xmlns:main="sap.ui.webc.main" 
 	xmlns="sap.m">
 	<Page title="{i18n>detailTitle}">
 		<Panel class="sapUiSmallMargin">
@@ -9,10 +10,10 @@
 			<VBox>
 				<HBox alignItems="Center" justifyContent="SpaceBetween">
 					<Title text="{i18n>contract}" />
-					<SearchField width="90%" search="" />
+					<SearchField width="90%" search="onSearchDetail" />
 				</HBox>
 			</VBox>
-			<Table id="table" items="{/tableData}">
+			<Table id="tableDataContract" items="{/tableData}">
 				<columns>
 					<Column>
 						<Text text="{i18n>contractDate}" />
@@ -49,19 +50,19 @@
 			</Table>
 		</Panel>
 		<!-- Agrotools -->
-		<Panel class="sapUiSmallMargin" headerText="{i18n>agrotools}">
-			<smartForm:SmartForm id="smartForm" editable="true" useHorizontalLayout="true">
+		<Panel class="sapUiSmallMargin" >
+			<smartForm:SmartForm title="{i18n>agrotools}" id="smartForm" editable="true" useHorizontalLayout="true">
 				<smartForm:Group>
 					<!-- Column 1 -->
 					<smartForm:GroupElement >
 						<VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>document}" />
-								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="100%" search="" />
+								<Input value="{/campo1}" placeholder="{i18n>keySearch}" width="100%" search="" />
 							</VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>municipality}" />
-								<Select change="handleChange" width="90%">
+								<Select change="handleChange" width="100%">
 									<items>
 										<core:Item text="" />
 										<core:Item text="" />
@@ -76,11 +77,11 @@
 						<VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>contact}" />
-								<Input value="{/campo11}" placeholder="{i18n>text}" width="90%" search="" />
+								<Input value="{/campo2}" placeholder="{i18n>text}" width="90%" search="" />
 							</VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>harvest}" />
-								<Input value="{/campo11}" placeholder="{i18n>text}" width="90%" search="" />
+								<Input value="{/campo3}" placeholder="{i18n>text}" width="90%" search="" />
 							</VBox>
 						</VBox>
 					</smartForm:GroupElement>
@@ -89,11 +90,11 @@
 						<VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>volumeTaded}" required="true" />
-								<Input value="{/campo11}" placeholder="{i18n>text}" width="90%" search="" />
+								<Input value="{/campo4}" placeholder="{i18n>text}" width="90%" search="" />
 							</VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>volumeAvailable}" />
-								<Input value="{/campo11}" placeholder="{i18n>text}" width="90%" search="" />
+								<Input value="{/campo5}" placeholder="{i18n>text}" width="90%" search="" />
 							</VBox>
 						</VBox>
 					</smartForm:GroupElement>
@@ -102,7 +103,7 @@
 						<VBox>
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>deliveryDate}" />
-								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="90%" search="" />
+								<Input value="{/campo6}" placeholder="{i18n>keySearch}" width="90%" search="" />
 							</VBox>
 						</VBox>
 					</smartForm:GroupElement>
@@ -129,17 +130,20 @@
 					<Column>
 						<Text text="{i18n>opinionsDateDelivery}" />
 					</Column>
+					<Column>
+						<Label />
+					</Column>
 				</columns>
 				<items>
 					<ColumnListItem>
 						<cells>
-							<!-- Aqui preenche com os bindings dos dados -->
-							<Text text="{Data}" />
-							<Text text="{CodigoBP}" />
-							<Text text="{Documento}" />
-							<Text text="{Nome}" />
-							<Text text="{Municio}" />
-							<Text text="{StatusBP}" />
+							<Input value="{Data}" editable="{viewModel>/isEditMode}" />
+							<Input value="{CodigoBP}" editable="{viewModel>/isEditMode}" />
+							<Input value="{Documento}" editable="{viewModel>/isEditMode}" />
+							<Input value="{Nome}" editable="{viewModel>/isEditMode}" />
+							<Input value="{Municio}" editable="{viewModel>/isEditMode}" />
+							<Input value="{StatusBP}" editable="{viewModel>/isEditMode}" />
+							<Button design="Transparent" press="onEditPress" icon="sap-icon://edit" />
 						</cells>
 					</ColumnListItem>
 				</items>
@@ -152,19 +156,22 @@
 					<!-- Column 1 -->
 					<smartForm:GroupElement>
 						<VBox>
+							<!-- BP SAP -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>bpSap}" />
-								<Input value="{/campo11}" placeholder="{i18n>text}" width="90%" search="" />
+								<Input id="bpSap" value="{/bpSap}" placeholder="{i18n>text}" width="90%" />
 							</VBox>
+							<!-- N° parecer -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>nCriterion}" />
-								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="90%" search="" />
+								<Input value="{/campo8}" placeholder="{i18n>keySearch}" width="90%" />
 							</VBox>
 						</VBox>
 					</smartForm:GroupElement>
 					<!-- Column 2 -->
 					<smartForm:GroupElement>
 						<VBox>
+							<!-- Status Parecer -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>stateCriterion}" />
 								<Select change="handleChange" width="90%">
@@ -175,6 +182,7 @@
 									</items>
 								</Select>
 							</VBox>
+							<!-- Motivo Anmálize -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>reasonAnalyze}" />
 								<Select change="handleChange" width="90%">
@@ -190,10 +198,21 @@
 					<!-- Column 3 -->
 					<smartForm:GroupElement>
 						<VBox >
+							<!-- Anexar Parecer -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>attachOpinion}" />
-								<Input value="{/campo11}" placeholder="{i18n>keySearch}" width="90%" search="" />
+								<main:FileUploader
+									value="{/campo9}"
+									placeholder="{i18n>opinionsSearch}"
+									width="100%"
+									uploadUrl="{suaURLdeUpload}"
+									uploadComplete="onUploadComplete"
+									change="onFileChange"
+									
+									/>
+								
 							</VBox>
+							<!-- Nao Conformidade -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>noCompliance}" />
 								<Select change="handleChange" width="90%">
@@ -209,6 +228,7 @@
 					<!-- Column 4 -->
 					<smartForm:GroupElement>
 						<VBox>
+							<!-- Motivo Parecer -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>reasonOpinion}" />
 								<Select change="handleChange" width="90%">
@@ -219,6 +239,7 @@
 									</items>
 								</Select>
 							</VBox>
+							<!-- Conformidade Desmatamento -->
 							<VBox class="sapUiTinyMargin">
 								<Label text="{i18n>complianceDeforestation}" />
 								<Select change="handleChange" width="90%">
@@ -244,7 +265,6 @@
 					type="Emphasized" 
 					press="onEscapePreventDialogPress" 
 					ariaHasPopup="Dialog"/>
-					<Button text="Histórico de pareceres temporário" press="onPareceres"/>
 				</contentRight>
 			</Bar>
 		</footer>

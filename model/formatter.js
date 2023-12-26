@@ -1,15 +1,13 @@
-sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function(Controller) {
+sap.ui.define([], function() {
     'use strict';
 
-    return Controller.extend("application.controller.HomePage", {
-        formatExistBlockColorScheme: function(sExistBlock) {
+    return {
+        formatExistBlockColorScheme(sExistBlock) {
             return sExistBlock === "BLOQUEADO" ? 2 : 8;
         },
 
-        formatStateColorScheme: function(sState) {
+        formatStateColorScheme(sState) {
             return sState === "COM DETECÇÃO" ? 5 : 10;
         }
-    });
+    };
 });

@@ -1,5 +1,13 @@
+/*Btn HomePage esconder filtros*/
+
 .btnDefault {
-    color: black;
+    color: black !important;
+}
+
+.btnDefault:hover {
+    color: black !important;
+    background-color: white !important;
+    border-color: black !important;
 }
 
 .sapUiForm .sapUiCompGroupElementVBox .sapMLabel:after {
@@ -10,7 +18,43 @@
     color: black;
 }
 
+
+/* Cad Opnion*/
+
+.sapVboxBorder {
+    border-radius: 15px 15px 0 0;
+}
+
+
+/* Card Opinion numeros*/
+
 .customTitleClass {
     font-size: 4rem;
-    /* ou o tamanho desejado em unidades que você preferir */
+}
+
+
+/*Bagde HomePage */
+
+:host([color-scheme="5"]) {
+    background-color: #3e0add;
+    border-color: #0d023b;
+    color: #c0b3f6;
+}
+
+:host([color-scheme="10"]) {
+    background-color: rgb(112, 115, 117);
+    border-color: rgb(112, 115, 117);
+    color: rgb(225, 231, 237);
+}
+
+:host([color-scheme="2"]) {
+    background-color: rgb(176, 17, 17);
+    border-color: rgb(176, 17, 17);
+    color: rgb(237, 161, 161);
+}
+
+:host([color-scheme="8"]) {
+    background-color: rgb(8, 60, 9);
+    border-color: rgb(8, 60, 9);
+    color: rgb(148, 192, 127);
 }

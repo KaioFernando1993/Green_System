@@ -32,7 +32,7 @@ sap.ui.define([
                 data: {
                     searchQuery: { value: "", prop: "Name", operator: FilterOperator.Contains },
                     codeBpQuery: { value: "", prop: "Code", operator: FilterOperator.Contains },
-                    existBlock: { value: "", prop: "ExistBlock", operator: FilterOperator.Contains },
+                    existBlock: { value: "", prop: "ExistBlock", operator: FilterOperator.EQ },
 
                     avaliable: { value: "", prop: "", operator: FilterOperator.Contains },
                     identification: { value: "", prop: "Identification", operator: FilterOperator.Contains },
@@ -40,7 +40,7 @@ sap.ui.define([
 
                     typePartner: { value: "", prop: "Type", operator: FilterOperator.Contains },
                     nameBp: { value: "", prop: "Name", operator: FilterOperator.Contains },
-                    status: { value: "", prop: "State", operator: FilterOperator.Contains },
+                    status: { value: "", prop: "State", operator: FilterOperator.EQ },
 
                     typeBp: { value: "", prop: "Type", operator: FilterOperator.Contains },
                     typeDateRegister: { value: "", prop: "DateRegister", operator: FilterOperator.Contains }
@@ -68,7 +68,7 @@ sap.ui.define([
             oRouter.navTo("DetailRoute");
         },
         onFilterPress: function() {
-            debugger
+
             const filterData = this.getView().getModel("visibleModel").getData().data;
             const values = Object.values(filterData);
 
